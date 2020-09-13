@@ -33,30 +33,29 @@ public class RabbitmqConfig {
     private SimpleRabbitListenerContainerFactoryConfigurer factoryConfigurer;
 
     @Value("${spring.rabbitmq.queue.name}")
-    private String queue;
+    private String queueName;
 
     @Value("${spring.rabbitmq.template.exchange}")
-    private String exchange;
+    private String exchangeName;
 
     @Value("${spring.rabbitmq.template.routing-key}")
-    private String routingKey;
+    private String routingKeyName;
 
     //定义队列
-    @Bean
-    public Queue queue(){
-        return new Queue(queue);
+    @Bean(name = "basicQueue")
+    public Queue basicQueue(){
+        return new Queue(queueName,true);
     }
 
     //创建交换机
-    @Bean
     public DirectExchange directExchange(){
-        return new DirectExchange(exchange,true,false);
+        return new DirectExchange(exchangeName,true,false);
     }
 
     //创建绑定
     @Bean
     public Binding binding(){
-        return BindingBuilder.bind(queue()).to(directExchange()).with(routingKey);
+        return BindingBuilder.bind(basicQueue()).to(directExchange()).with(routingKeyName);
     }
 
 
@@ -78,7 +77,6 @@ public class RabbitmqConfig {
         factory.setMaxConcurrentConsumers(1);
         //6.设置并发消费者实例中每个实例拉取的消息数量
         factory.setPrefetchCount(1);
-        factory.setAcknowledgeMode(AcknowledgeMode.NONE);
         return factory;
 
     }
@@ -106,10 +104,10 @@ public class RabbitmqConfig {
         return factory;
     }
 
-    @Bean("testRabbitmq")
+    @Bean
     public RabbitTemplate rabbitTemplate(){
         //1.设置发送消息后确认 (ack设置为true)
-        cachingConnectionFactory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
+        cachingConnectionFactory.setPublisherConfirms(true);
         //2.发送消息后返回确认信息
         cachingConnectionFactory.setPublisherReturns(true);
         //3.构造发送消息组件实例对象

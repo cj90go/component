@@ -30,7 +30,6 @@ public class FanoutProvider {
     String fanoutExchange;
 
     @Autowired
-    @Qualifier("testRabbitmq")
     private RabbitTemplate rabbitTemplate;
 
     public void sendMsg(EventInfo message) {

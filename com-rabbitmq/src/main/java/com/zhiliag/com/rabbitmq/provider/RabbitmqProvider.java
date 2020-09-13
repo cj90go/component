@@ -31,7 +31,6 @@ public class RabbitmqProvider {
     private String routingKey;
 
     @Autowired
-    @Qualifier("testRabbitmq")
     private RabbitTemplate rabbitTemplate;
 
     public void send(String message){
