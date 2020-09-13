@@ -1,4 +1,4 @@
-package com.zhiliag.com.rabbitmq.consumer;
+package com.zhiliag.com.rabbitmq.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

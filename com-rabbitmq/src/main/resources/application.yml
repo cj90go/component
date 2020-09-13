@@ -50,12 +50,19 @@ spring:
 component:
   fanoutExchange: test.exchange.fanout
   directExchange: test.exchange.direct
+  topicExchange:  test.exchange.topic
   queue:
     direct:
       name1:  test.queue.direct1
       name2:  test.queue.direct2
+    topic:
+      name1:  test.queue.topic1
+      name2:  test.queue.topic2
   routing-key:
     direct:
       keyOne: test.queue.direct1.key
       keyTwo: test.queue.direct2.key
+    topic:
+      keyOne: test.queue.topic.routing.*.key
+      keyTwo: test.queue.topic.routing.#.key
 

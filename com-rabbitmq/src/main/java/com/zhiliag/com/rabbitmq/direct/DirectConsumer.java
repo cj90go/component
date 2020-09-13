@@ -1,7 +1,7 @@
 package com.zhiliag.com.rabbitmq.direct;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhiliag.com.rabbitmq.fanout.EventInfo;
+import com.zhiliag.com.rabbitmq.config.EventInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

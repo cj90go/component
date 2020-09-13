@@ -1,4 +1,4 @@
-package com.zhiliag.com.rabbitmq.fanout;
+package com.zhiliag.com.rabbitmq.config;
 
 import lombok.Data;
 
