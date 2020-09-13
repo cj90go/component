@@ -9,4 +9,11 @@ mysql:
           2.基于jmeter模拟并发下,接口满足数据一致性和业务的需求
 
 redis:
+
+
+
+二.SpringBoot整合rabbitmq:
+   package: spring 基于Spring事件驱动模型,实现异步发送消息
+   rabbitmq: springboot整合rabbitmq实现消息发送和接收
+   
     
