@@ -4,11 +4,13 @@ import com.zhiliag.com.rabbitmq.direct.DirectProvider;
 import com.zhiliag.com.rabbitmq.config.EventInfo;
 import com.zhiliag.com.rabbitmq.fanout.FanoutProvider;
 import com.zhiliag.com.rabbitmq.config.RabbitmqProvider;
+import com.zhiliag.com.rabbitmq.konwledge.auto.RabbitAutoProvider;
 import com.zhiliag.com.rabbitmq.topic.TopicProvider;
 import org.junit.Test;
 import org.junit.platform.commons.logging.Logger;
 import org.junit.platform.commons.logging.LoggerFactory;
 import org.junit.runner.RunWith;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -21,6 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  **/
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@EnableRabbit
 public class RabbitmqTest {
 
     private static final Logger logger= LoggerFactory.getLogger(RabbitmqTest.class);
@@ -37,6 +40,9 @@ public class RabbitmqTest {
 
     @Autowired
     TopicProvider topicProvider;
+
+    @Autowired
+    RabbitAutoProvider autoProvider;
 
     private String routingKeyOne="test.queue.topic.routing.java.key";//基于通配符(*)
 
@@ -80,5 +86,11 @@ public class RabbitmqTest {
         topicProvider.sendMsgTopic(routingKeyOne,eventInfo);
         topicProvider.sendMsgTopic(routingKeyTwo,eventInfo);
         topicProvider.sendMsgTopic(routingKeyThree,eventInfo);
+    }
+
+    @Test
+    public void testAutoKnowledge(){
+        EventInfo eventInfo=new EventInfo(1,"test","test","test");
+        autoProvider.sendAutoMsg(eventInfo);
     }
 }

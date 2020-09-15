@@ -51,6 +51,7 @@ component:
   fanoutExchange: test.exchange.fanout
   directExchange: test.exchange.direct
   topicExchange:  test.exchange.topic
+  autoExchange:   test.exchange.auto
   queue:
     direct:
       name1:  test.queue.direct1
@@ -58,6 +59,8 @@ component:
     topic:
       name1:  test.queue.topic1
       name2:  test.queue.topic2
+    auto:
+      autoQueue:  test.queue.auto
   routing-key:
     direct:
       keyOne: test.queue.direct1.key
@@ -65,4 +68,6 @@ component:
     topic:
       keyOne: test.queue.topic.routing.*.key
       keyTwo: test.queue.topic.routing.#.key
+    auto:
+      routingKey: test.queue.direct.auto
 
